@@ -88,6 +88,44 @@ def update_hand_gesture_control(player, playerBullets, assets):
         
         # Aplicar rotación
         player.direction.rotate_ip(rotation_delta)
+        
+        # Controlar movimiento con posición de la mano
+        # hand_x = 0 (izquierda), 0.5 (centro), 1 (derecha)
+        # hand_y = 0 (arriba), 0.5 (centro), 1 (abajo)
+        
+        hand_x = result['hand_x']
+        hand_y = result['hand_y']
+        
+        # Calcular vectores de dirección
+        forward = player.direction
+        right_vector = Vector2(-player.direction.y, player.direction.x)
+        
+        # Extraer componentes actuales
+        forward_vel = player.velocity.dot(forward)
+        lateral_vel = player.velocity.dot(right_vector)
+        
+        # Controlar movimiento vertical (forward/backward)
+        if hand_y < 0.4:
+            forward_vel = player.speed * 2
+        elif hand_y > 0.6:
+            forward_vel = -player.speed * 2
+        else:
+            forward_vel *= 0.9  # Desacelerar suavemente
+        
+        # Controlar movimiento horizontal (izquierda/derecha)
+        if hand_x < 0.4:
+            lateral_vel = -player.speed * 1.5
+        elif hand_x > 0.6:
+            lateral_vel = player.speed * 1.5
+        else:
+            lateral_vel *= 0.9  # Desacelerar suavemente
+        
+        # Reconstruir velocidad
+        player.velocity = forward * forward_vel + right_vector * lateral_vel
+        
+        # Limitar velocidad máxima
+        if player.velocity.length() > 4:
+            player.velocity.scale_to_length(4)
     
     # Disparo automático continuo (cada 6 frames aproximadamente)
     config.FRAME_COUNTER = getattr(config, 'FRAME_COUNTER', 0) + 1

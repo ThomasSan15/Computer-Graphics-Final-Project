@@ -164,6 +164,8 @@ class HandGestureController:
                 'hand_detected': False,
                 'thumb_angle': 0,
                 'ship_rotation': 0,
+                'hand_x': 0.5,
+                'hand_y': 0.5,
                 'calibrated': self.is_calibrated
             }
         
@@ -175,6 +177,8 @@ class HandGestureController:
                     'hand_detected': False,
                     'thumb_angle': 0,
                     'ship_rotation': 0,
+                    'hand_x': 0.5,
+                    'hand_y': 0.5,
                     'calibrated': self.is_calibrated
                 }
             
@@ -190,11 +194,18 @@ class HandGestureController:
             
             thumb_angle = 0
             hand_detected = False
+            hand_x = 0.5  # Centro por defecto
+            hand_y = 0.5
             
             # Si se detectó una mano
             if results.multi_hand_landmarks and len(results.multi_hand_landmarks) > 0:
                 hand_detected = True
                 hand_landmarks = results.multi_hand_landmarks[0].landmark
+                
+                # Obtener posición de la muñeca (centro de la mano)
+                wrist = hand_landmarks[0]
+                hand_x = wrist.x  # Normalizado 0-1
+                hand_y = wrist.y  # Normalizado 0-1
                 
                 # Calcular ángulo del pulgar
                 thumb_angle = self.calculate_thumb_angle(
@@ -205,7 +216,7 @@ class HandGestureController:
                     self.angle_history.append(thumb_angle)
                     
                     if self.debug:
-                        print(f"Pulgar: {thumb_angle:.1f}° | Calibrado: {self.is_calibrated} | Neutral: {self.neutral_angle}")
+                        print(f"Pulgar: {thumb_angle:.1f}° | Pos: ({hand_x:.2f}, {hand_y:.2f}) | Calibrado: {self.is_calibrated}")
                     
                     # Calibración automática
                     if not self.is_calibrated:
@@ -217,6 +228,8 @@ class HandGestureController:
                 'hand_detected': hand_detected,
                 'thumb_angle': thumb_angle,
                 'ship_rotation': ship_rotation,
+                'hand_x': hand_x,
+                'hand_y': hand_y,
                 'calibrated': self.is_calibrated
             }
         except Exception as e:
@@ -228,6 +241,8 @@ class HandGestureController:
                 'hand_detected': False,
                 'thumb_angle': 0,
                 'ship_rotation': 0,
+                'hand_x': 0.5,
+                'hand_y': 0.5,
                 'calibrated': self.is_calibrated
             }
 
