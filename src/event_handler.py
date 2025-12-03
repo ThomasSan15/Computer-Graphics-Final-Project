@@ -7,6 +7,24 @@ from src import config
 from src.classes.bullet import Bullet
 from src.game_logic import generate_asteroids, resetAfterLosingALife
 from src.utils.general import saveTopScoreFile
+from pygame import Vector2
+
+
+# Variable global para el controlador de gestos
+hand_controller = None
+
+
+def initialize_hand_controller():
+    """Inicializa el controlador de gestos de mano"""
+    global hand_controller
+    try:
+        from src.hand_gesture_controller import HandGestureController
+        hand_controller = HandGestureController(smoothing_window=3, debug=False)
+        print("✓ Controlador de mano inicializado correctamente")
+        return True
+    except Exception as e:
+        print(f"✗ Error al inicializar controlador de mano: {e}")
+        return False
 
 
 def handle_events(player, playerBullets, asteroidObjects, assets, RUNGAME):
@@ -18,11 +36,6 @@ def handle_events(player, playerBullets, asteroidObjects, assets, RUNGAME):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 return False
-
-            # Disparo
-            if event.key == pygame.K_SPACE:
-                playerBullets.append(Bullet(player.pos, player.direction))
-                assets['shootSound'].play()
 
             # Reiniciar tras Game Over
             if config.GAMEOVER and event.key == pygame.K_TAB:
@@ -36,13 +49,58 @@ def handle_events(player, playerBullets, asteroidObjects, assets, RUNGAME):
     return RUNGAME
 
 
-def handle_player_controls(player, keys_pressed):
-    """Maneja los controles de movimiento del jugador"""
-    if keys_pressed[pygame.K_LEFT] or keys_pressed[pygame.K_a]:
-        player.rotation(-1)
-    elif keys_pressed[pygame.K_RIGHT] or keys_pressed[pygame.K_d]:
-        player.rotation(1)
+def update_hand_gesture_control(player, playerBullets, assets):
+    """
+    Procesa el control de gestos de mano y actualiza la rotación de la nave
+    También maneja el disparo automático
+    """
+    global hand_controller
+    
+    if hand_controller is None:
+        return
+    
+    # Procesar frame de la cámara
+    result = hand_controller.process_frame()
+    
+    # Si la calibración está completa, usar el ángulo de rotación
+    if result['calibrated'] and result['hand_detected']:
+        # Calcular el ángulo de rotación deseado
+        target_rotation = result['ship_rotation']
+        
+        # Obtener ángulo actual de la nave
+        current_angle = player.direction.angle_to(Vector2(0, -1))
+        
+        # Calcular diferencia angular
+        angle_diff = -(target_rotation - current_angle)  # INVERTIDO
+        
+        # Normalizar diferencia a rango [-180, 180]
+        while angle_diff > 180:
+            angle_diff -= 360
+        while angle_diff < -180:
+            angle_diff += 360
+        
+        # Aplicar rotación suave (limitar el cambio por frame)
+        max_rotation_per_frame = 8  # Balance entre responsividad y control
+        if abs(angle_diff) > max_rotation_per_frame:
+            rotation_delta = max_rotation_per_frame if angle_diff > 0 else -max_rotation_per_frame
+        else:
+            rotation_delta = angle_diff
+        
+        # Aplicar rotación
+        player.direction.rotate_ip(rotation_delta)
+    
+    # Disparo automático continuo (cada 6 frames aproximadamente)
+    config.FRAME_COUNTER = getattr(config, 'FRAME_COUNTER', 0) + 1
+    if config.FRAME_COUNTER % 6 == 0:
+        playerBullets.append(Bullet(player.pos, player.direction))
+        assets['shootSound'].play()
 
+
+def handle_player_controls(player, keys_pressed):
+    """
+    Maneja los controles de movimiento del jugador
+    Ahora solo controla aceleración (rotación es por visión)
+    """
     # Avanzar
     if keys_pressed[pygame.K_UP] or keys_pressed[pygame.K_w]:
         player.accelerate()
@@ -52,3 +110,11 @@ def handle_player_controls(player, keys_pressed):
         player.velocity -= player.direction * player.speed
         if player.velocity.length() > 4:
             player.velocity.scale_to_length(4)
+
+
+def cleanup_hand_controller():
+    """Libera los recursos del controlador de mano"""
+    global hand_controller
+    if hand_controller is not None:
+        hand_controller.release()
+        hand_controller = None

@@ -23,7 +23,13 @@ from src.game_logic import (
     calculateTotalNumAsteroids
 )
 from src.rendering import gameWindowUpdating
-from src.event_handler import handle_events, handle_player_controls
+from src.event_handler import (
+    handle_events, 
+    handle_player_controls,
+    initialize_hand_controller,
+    update_hand_gesture_control,
+    cleanup_hand_controller
+)
 
 # ==============================
 #   INICIALIZAR PANTALLA
@@ -45,6 +51,15 @@ config.STAGE = 1
 config.LIVES = 3
 config.GAMEOVER = False
 config.SCORE = 0
+config.FRAME_COUNTER = 0  # Contador de frames para disparo automático
+
+# Inicializar controlador de gestos de mano
+print("Inicializando sistema de visión por computador...")
+if not initialize_hand_controller():
+    print("⚠ Advertencia: No se pudo inicializar el controlador de mano")
+    print("  El juego funcionará solo con controles de teclado")
+    print("  - W/↑ para acelerar")
+    print("  - S/↓ para retroceso")
 
 player = Player((config.SCREENWIDTH // 2, config.SCREENHEIGHT // 2), assets['playerImg'])
 playerBullets = []
@@ -138,6 +153,9 @@ while RUNGAME:
 
     RUNGAME = handle_events(player, playerBullets, asteroidObjects, assets, RUNGAME)
 
+    # Actualizar control por visión de computador
+    update_hand_gesture_control(player, playerBullets, assets)
+
     keys_pressed = pygame.key.get_pressed()
     handle_player_controls(player, keys_pressed)
 
@@ -146,4 +164,5 @@ while RUNGAME:
     config.CLOCK.tick(config.FPS)
 
 pygame.quit()
+cleanup_hand_controller()
 sys.exit()
