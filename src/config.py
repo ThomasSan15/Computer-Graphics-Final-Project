@@ -18,6 +18,9 @@ LIVES = 3
 GAMEOVER = False
 SCORE = 0
 TOPSCORE = 0
+GAME_STARTED = False  # False = pantalla de inicio, True = juego en progreso
+HIT_BY_ASTEROID = False  # True cuando nos golpea un asteroide
+HIT_TIMER = 0  # Contador para mostrar pantalla de impacto durante 3 segundos
 
 # Clock y FPS
 CLOCK = pygame.time.Clock()

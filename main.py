@@ -3,6 +3,7 @@ import os
 import pygame
 from pygame import Vector2
 
+
 pygame.init()  # Inicializa pygame
 
 # ==============================
@@ -22,7 +23,7 @@ from src.game_logic import (
     resetAfterLosingALife,
     calculateTotalNumAsteroids
 )
-from src.rendering import gameWindowUpdating
+from src.rendering import gameWindowUpdating, drawStartScreen, drawAsteroidHitScreen
 from src.event_handler import handle_events, handle_player_controls
 
 # ==============================
@@ -58,6 +59,23 @@ generate_asteroids(asteroidObjects, Asteroid, assets)
 
 RUNGAME = True
 while RUNGAME:
+
+    # Pantalla de inicio
+    if not config.GAME_STARTED:
+        drawStartScreen(config.GAMESCREEN)
+        RUNGAME = handle_events(player, playerBullets, asteroidObjects, assets, RUNGAME)
+        config.CLOCK.tick(config.FPS)
+        continue
+
+    # Pantalla de impacto con asteroide
+    if config.HIT_BY_ASTEROID:
+        drawAsteroidHitScreen(config.GAMESCREEN)
+        RUNGAME = handle_events(player, playerBullets, asteroidObjects, assets, RUNGAME)
+        config.HIT_TIMER -= 1
+        if config.HIT_TIMER <= 0:
+            config.HIT_BY_ASTEROID = False
+        config.CLOCK.tick(config.FPS)
+        continue
 
     if not config.GAMEOVER:
 
@@ -138,11 +156,19 @@ while RUNGAME:
 
     RUNGAME = handle_events(player, playerBullets, asteroidObjects, assets, RUNGAME)
 
+    if not config.GAME_STARTED or config.HIT_BY_ASTEROID:
+        continue
+
     keys_pressed = pygame.key.get_pressed()
     handle_player_controls(player, keys_pressed)
 
     # Dibuja todo
-    gameWindowUpdating(config.GAMESCREEN, player, playerBullets, asteroidObjects, assets['bgImg'], assets['heartImg'])
+    if config.HIT_BY_ASTEROID:
+        drawAsteroidHitScreen(config.GAMESCREEN)
+    elif config.GAME_STARTED:
+        gameWindowUpdating(config.GAMESCREEN, player, playerBullets, asteroidObjects, assets['bgImg'], assets['heartImg'])
+    else:
+        drawStartScreen(config.GAMESCREEN)
     config.CLOCK.tick(config.FPS)
 
 pygame.quit()

@@ -7,6 +7,41 @@ from src import config
 from src.utils.general import textScreen
 
 
+def drawStartScreen(GAMESCREEN):
+    """Dibuja la pantalla de inicio"""
+    shadow, titleText = textScreen("ASTEROIDS", 80, (255, 200, 50))
+    GAMESCREEN.blit(shadow, (config.SCREENWIDTH // 2 - titleText.get_width() // 2 - 3, 80))
+    GAMESCREEN.blit(titleText, (config.SCREENWIDTH // 2 - titleText.get_width() // 2, 80))
+    
+    shadow, startText = textScreen("Press SPACE to Start", 36, (150, 255, 150))
+    GAMESCREEN.blit(shadow, (config.SCREENWIDTH // 2 - startText.get_width() // 2 - 2, config.SCREENHEIGHT // 2))
+    GAMESCREEN.blit(startText, (config.SCREENWIDTH // 2 - startText.get_width() // 2, config.SCREENHEIGHT // 2))
+    
+    shadow, bestText = textScreen(f"Best Score: {config.TOPSCORE}", 24, (0, 255, 255))
+    GAMESCREEN.blit(shadow, (config.SCREENWIDTH // 2 - bestText.get_width() // 2 - 1, config.SCREENHEIGHT - 150))
+    GAMESCREEN.blit(bestText, (config.SCREENWIDTH // 2 - bestText.get_width() // 2, config.SCREENHEIGHT - 150))
+    
+    pygame.display.update()
+
+
+def drawAsteroidHitScreen(GAMESCREEN):
+    """Dibuja la pantalla de impacto con asteroide"""
+    shadow, hitText = textScreen("¡GOLPEADO POR ASTEROIDE!", 50, (255, 50, 50))
+    GAMESCREEN.blit(shadow, (config.SCREENWIDTH // 2 - hitText.get_width() // 2 - 3, config.SCREENHEIGHT // 2 - 100))
+    GAMESCREEN.blit(hitText, (config.SCREENWIDTH // 2 - hitText.get_width() // 2, config.SCREENHEIGHT // 2 - 100))
+    
+    if config.LIVES > 0:
+        shadow, continueText = textScreen("Press SPACE to continue...", 30, (150, 255, 150))
+        GAMESCREEN.blit(shadow, (config.SCREENWIDTH // 2 - continueText.get_width() // 2 - 2, config.SCREENHEIGHT // 2 + 50))
+        GAMESCREEN.blit(continueText, (config.SCREENWIDTH // 2 - continueText.get_width() // 2, config.SCREENHEIGHT // 2 + 50))
+    
+    shadow, livesText = textScreen(f"Vidas restantes: {config.LIVES}", 28, (0, 255, 255))
+    GAMESCREEN.blit(shadow, (config.SCREENWIDTH // 2 - livesText.get_width() // 2 - 1, config.SCREENHEIGHT - 100))
+    GAMESCREEN.blit(livesText, (config.SCREENWIDTH // 2 - livesText.get_width() // 2, config.SCREENHEIGHT - 100))
+    
+    pygame.display.update()
+
+
 def gameWindowUpdating(GAMESCREEN, player, playerBullets, asteroidObjects, BGIMG, heartImg):
     """Dibuja todos los elementos en pantalla y actualiza el frame"""
     GAMESCREEN.blit(BGIMG, (0, 0))

@@ -52,7 +52,9 @@ def resetAfterLosingALife(player, asteroidObjects, playerBullets):
         for index, asteroidObject in enumerate(asteroidObjects):
             player_pos = Vector2(player.pos[0], player.pos[1])
             asteroidObject.pos = generate_random_location(player_pos)
-        pygame.time.wait(5000)
+        # Establecer el estado de impacto en lugar de bloquear con wait()
+        config.HIT_BY_ASTEROID = True
+        config.HIT_TIMER = 180  # 3 segundos a 60 FPS
     else:
         asteroidObjects.clear()
 

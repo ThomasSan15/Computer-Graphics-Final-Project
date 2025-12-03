@@ -19,8 +19,20 @@ def handle_events(player, playerBullets, asteroidObjects, assets, RUNGAME):
             if event.key == pygame.K_ESCAPE:
                 return False
 
+            # Continuar después de impacto con asteroide
+            if config.HIT_BY_ASTEROID and event.key == pygame.K_SPACE:
+                config.HIT_BY_ASTEROID = False
+                config.HIT_TIMER = 0
+                return RUNGAME
+
+            # Iniciar juego desde pantalla de inicio
+            if not config.GAME_STARTED and event.key == pygame.K_SPACE:
+                config.GAME_STARTED = True
+                pygame.mixer.music.play(-1)  # -1 para reproducir en loop infinito
+                return RUNGAME
+
             # Disparo
-            if event.key == pygame.K_SPACE:
+            if config.GAME_STARTED and not config.HIT_BY_ASTEROID and event.key == pygame.K_SPACE:
                 playerBullets.append(Bullet(player.pos, player.direction))
                 assets['shootSound'].play()
 
@@ -31,6 +43,10 @@ def handle_events(player, playerBullets, asteroidObjects, assets, RUNGAME):
                 config.LIVES = 3
                 config.SCORE = 0
                 config.GAMEOVER = False
+                config.GAME_STARTED = True
+                config.HIT_BY_ASTEROID = False
+                config.HIT_TIMER = 0
+                pygame.mixer.music.play(-1)
                 generate_asteroids(asteroidObjects, __import__('src.classes.asteroid', fromlist=['Asteroid']).Asteroid, assets)
 
     return RUNGAME

@@ -69,6 +69,10 @@ def loadAllAssets():
     explSound = pygame.mixer.Sound('assets/sounds/bangSmall.wav')
     shipExplSound = pygame.mixer.Sound('assets/sounds/bangLarge.wav')
     
+    # Música de fondo
+    pygame.mixer.music.load('assets/sounds/song.mp3')
+    pygame.mixer.music.set_volume(0.7)
+    
     # Icono de ventana
     icnImg = gameImageLoad('assets/Nave.png', (20, 20))
     icnImg = pygame.transform.rotate(icnImg, -90)
