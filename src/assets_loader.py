@@ -66,6 +66,7 @@ def loadAllAssets():
     
     # Sonidos
     shootSound = pygame.mixer.Sound('assets/sounds/laser.wav')
+    shootSound.set_volume(0.3)  # Reducir volumen del disparo
     explSound = pygame.mixer.Sound('assets/sounds/bangSmall.wav')
     shipExplSound = pygame.mixer.Sound('assets/sounds/bangLarge.wav')
     

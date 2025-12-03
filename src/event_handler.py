@@ -65,13 +65,13 @@ def update_hand_gesture_control(player, playerBullets, assets):
     # Si la calibración está completa, usar el ángulo de rotación
     if result['calibrated'] and result['hand_detected']:
         # Calcular el ángulo de rotación deseado
-        target_rotation = result['ship_rotation']
+        target_rotation = -result['ship_rotation']  # INVERTIDO
         
         # Obtener ángulo actual de la nave
         current_angle = player.direction.angle_to(Vector2(0, -1))
         
         # Calcular diferencia angular
-        angle_diff = -(target_rotation - current_angle)  # INVERTIDO
+        angle_diff = target_rotation - current_angle
         
         # Normalizar diferencia a rango [-180, 180]
         while angle_diff > 180:
