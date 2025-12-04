@@ -73,6 +73,7 @@ class HandController:
             pass
 
     def _lerp_angle(self, a, b, t):
+        """Interpolación lineal entre ángulos a y b con factor t (0..1)"""
         diff = (b - a + math.pi) % (2 * math.pi) - math.pi
         return a + diff * t
 
