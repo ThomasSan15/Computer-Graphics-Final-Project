@@ -118,6 +118,7 @@ Proyecto desarrollado como trabajo final del curso de Computación Gráfica.
 **Desarrolladores**
 
 
+```html
 <a href="https://github.com/pablomarin-utp">
 	<img src="https://github.com/pablomarin-utp.png" width="40" alt="pablomarin-utp" style="border-radius:6px; vertical-align:middle; margin-right:8px;">
 	<strong>pablomarin-utp</strong>
@@ -132,5 +133,6 @@ Proyecto desarrollado como trabajo final del curso de Computación Gráfica.
 	<img src="https://github.com/Juan-Garcia16.png" width="40" alt="Juan-Garcia16" style="border-radius:6px; vertical-align:middle; margin-right:8px;">
 	<strong>Juan-Garcia16</strong>
 </a>
+```
 
 
