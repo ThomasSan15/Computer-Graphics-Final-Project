@@ -25,7 +25,7 @@ class HandController:
     """
 
     def __init__(self, screen_w, screen_h, max_num_hands=1, detection_conf=0.6,
-                 pos_alpha=0.35, dir_alpha=0.5):
+                 pos_alpha=0.05, dir_alpha=1):
         self.screen_w = screen_w
         self.screen_h = screen_h
         self.pos_alpha = pos_alpha
