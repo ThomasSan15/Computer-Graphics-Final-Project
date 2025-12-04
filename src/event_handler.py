@@ -9,7 +9,7 @@ from src.game_logic import generate_asteroids, resetAfterLosingALife
 from src.utils.general import saveTopScoreFile
 
 
-def handle_events(player, playerBullets, asteroidObjects, assets, RUNGAME):
+def handle_events(player, playerBullets, asteroidObjects, assets, RUNGAME, hand_controller=None):
     """Maneja todos los eventos del juego"""
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -35,6 +35,14 @@ def handle_events(player, playerBullets, asteroidObjects, assets, RUNGAME):
             if config.GAME_STARTED and not config.HIT_BY_ASTEROID and event.key == pygame.K_SPACE:
                 playerBullets.append(Bullet(player.pos, player.direction))
                 assets['shootSound'].play()
+
+            # Toggle para invertir rotación de mano
+            if event.key == pygame.K_r and hand_controller is not None:
+                try:
+                    hand_controller.hand_rotation_flip *= -1
+                    print(f'hand_rotation_flip = {hand_controller.hand_rotation_flip}')
+                except Exception:
+                    pass
 
             # Reiniciar tras Game Over
             if config.GAMEOVER and event.key == pygame.K_TAB:
