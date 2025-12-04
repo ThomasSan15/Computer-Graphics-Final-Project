@@ -127,7 +127,7 @@ Proyecto desarrollado como trabajo final del curso de Computación Gráfica.
 		</td>
 		<td align="center" style="padding:12px 24px;">
 			<a href="https://github.com/ThomasSan15" style="text-decoration:none; color:inherit;">
-				<img src="https://github.com/ThomasSan15.png" width="90" height="90" alt="ThomasSan15" style="border-radius:50%; box-shadow:0 2px 6px rgba(0,0,0,0.12); display:block; margin:0 auto 8px;">
+				<img src="https://github.com/ThomasSan15.png" width="90" height="90" alt="ThomasSan15 HIJO" style="border-radius:50%; box-shadow:0 2px 6px rgba(0,0,0,0.12); display:block; margin:0 auto 8px;">
 				<div style="font-weight:700; font-size:14px;">ThomasSan15</div>
 			</a>
 		</td>
