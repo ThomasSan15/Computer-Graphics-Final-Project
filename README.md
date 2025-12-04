@@ -117,22 +117,21 @@ Proyecto desarrollado como trabajo final del curso de Computación Gráfica.
 
 **Desarrolladores**
 
+<div style="display:flex; gap:20px; align-items:center;">
+	<a href="https://github.com/pablomarin-utp" style="text-decoration:none; color:inherit; text-align:center;">
+		<img src="https://github.com/pablomarin-utp.png" width="64" height="64" alt="pablomarin-utp" style="border-radius:8px; display:block; margin:0 auto 6px;">
+		<div style="font-weight:600;">pablomarin-utp</div>
+	</a>
 
-```html
-<a href="https://github.com/pablomarin-utp">
-	<img src="https://github.com/pablomarin-utp.png" width="40" alt="pablomarin-utp" style="border-radius:6px; vertical-align:middle; margin-right:8px;">
-	<strong>pablomarin-utp</strong>
-</a>
+	<a href="https://github.com/ThomasSan15" style="text-decoration:none; color:inherit; text-align:center;">
+		<img src="https://github.com/ThomasSan15.png" width="64" height="64" alt="ThomasSan15" style="border-radius:8px; display:block; margin:0 auto 6px;">
+		<div style="font-weight:600;">ThomasSan15</div>
+	</a>
 
-<a href="https://github.com/ThomasSan15" style="margin-left:16px;">
-	<img src="https://github.com/ThomasSan15.png" width="40" alt="ThomasSan15" style="border-radius:6px; vertical-align:middle; margin-right:8px;">
-	<strong>ThomasSan15</strong>
-</a>
-
-<a href="https://github.com/Juan-Garcia16" style="margin-left:16px;">
-	<img src="https://github.com/Juan-Garcia16.png" width="40" alt="Juan-Garcia16" style="border-radius:6px; vertical-align:middle; margin-right:8px;">
-	<strong>Juan-Garcia16</strong>
-</a>
-```
+	<a href="https://github.com/Juan-Garcia16" style="text-decoration:none; color:inherit; text-align:center;">
+		<img src="https://github.com/Juan-Garcia16.png" width="64" height="64" alt="Juan-Garcia16" style="border-radius:8px; display:block; margin:0 auto 6px;">
+		<div style="font-weight:600;">Juan-Garcia16</div>
+	</a>
+</div>
 
 
