@@ -117,18 +117,25 @@ Proyecto desarrollado como trabajo final del curso de Computación Gráfica.
 
 **Desarrolladores**
 
-<div style="display:flex; gap:28px; align-items:center; justify-content:center;">
-	<a href="https://github.com/pablomarin-utp" style="text-decoration:none; color:inherit; text-align:center; width:110px;">
-		<img src="https://github.com/pablomarin-utp.png" width="80" height="80" alt="pablomarin-utp" style="border-radius:50%; display:block; margin:0 auto 8px; box-shadow:0 2px 6px rgba(0,0,0,0.15);">
-		<div style="font-weight:700; font-size:14px;">pablomarin-utp</div>
-	</a>
-	<a href="https://github.com/ThomasSan15" style="text-decoration:none; color:inherit; text-align:center; width:110px;">
-		<img src="https://github.com/ThomasSan15.png" width="80" height="80" alt="ThomasSan15" style="border-radius:50%; display:block; margin:0 auto 8px; box-shadow:0 2px 6px rgba(0,0,0,0.15);">
-		<div style="font-weight:700; font-size:14px;">ThomasSan15</div>
-	</a>
-	<a href="https://github.com/Juan-Garcia16" style="text-decoration:none; color:inherit; text-align:center; width:110px;">
-		<img src="https://github.com/Juan-Garcia16.png" width="80" height="80" alt="Juan-Garcia16" style="border-radius:50%; display:block; margin:0 auto 8px; box-shadow:0 2px 6px rgba(0,0,0,0.15);">
-		<div style="font-weight:700; font-size:14px;">Juan-Garcia16</div>
-	</a>
-</div>
-
+<table>
+	<tr>
+		<td align="center" style="padding:12px 24px;">
+			<a href="https://github.com/pablomarin-utp" style="text-decoration:none; color:inherit;">
+				<img src="https://github.com/pablomarin-utp.png" width="90" height="90" alt="pablomarin-utp" style="border-radius:50%; box-shadow:0 2px 6px rgba(0,0,0,0.12); display:block; margin:0 auto 8px;">
+				<div style="font-weight:700; font-size:14px;">pablomarin-utp</div>
+			</a>
+		</td>
+		<td align="center" style="padding:12px 24px;">
+			<a href="https://github.com/ThomasSan15" style="text-decoration:none; color:inherit;">
+				<img src="https://github.com/ThomasSan15.png" width="90" height="90" alt="ThomasSan15" style="border-radius:50%; box-shadow:0 2px 6px rgba(0,0,0,0.12); display:block; margin:0 auto 8px;">
+				<div style="font-weight:700; font-size:14px;">ThomasSan15</div>
+			</a>
+		</td>
+		<td align="center" style="padding:12px 24px;">
+			<a href="https://github.com/Juan-Garcia16" style="text-decoration:none; color:inherit;">
+				<img src="https://github.com/Juan-Garcia16.png" width="90" height="90" alt="Juan-Garcia16" style="border-radius:50%; box-shadow:0 2px 6px rgba(0,0,0,0.12); display:block; margin:0 auto 8px;">
+				<div style="font-weight:700; font-size:14px;">Juan-Garcia16</div>
+			</a>
+		</td>
+	</tr>
+</table>
