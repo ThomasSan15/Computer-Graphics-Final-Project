@@ -117,16 +117,20 @@ Proyecto desarrollado como trabajo final del curso de Computación Gráfica.
 
 **Desarrolladores**
 
-- [pablomarin-utp](https://github.com/pablomarin-utp)
-- [ThomasSan15](https://github.com/ThomasSan15)
-- [Juan-Garcia16](https://github.com/Juan-Garcia16)
 
-Si prefieres otra presentación (con avatar o listado en una sola línea), puedes usar este snippet Markdown:
+<a href="https://github.com/pablomarin-utp">
+	<img src="https://github.com/pablomarin-utp.png" width="40" alt="pablomarin-utp" style="border-radius:6px; vertical-align:middle; margin-right:8px;">
+	<strong>pablomarin-utp</strong>
+</a>
 
-```markdown
-- [pablomarin-utp](https://github.com/pablomarin-utp) • [ThomasSan15](https://github.com/ThomasSan15) • [Juan-Garcia16](https://github.com/Juan-Garcia16)
-```
+<a href="https://github.com/ThomasSan15" style="margin-left:16px;">
+	<img src="https://github.com/ThomasSan15.png" width="40" alt="ThomasSan15" style="border-radius:6px; vertical-align:middle; margin-right:8px;">
+	<strong>ThomasSan15</strong>
+</a>
 
----
+<a href="https://github.com/Juan-Garcia16" style="margin-left:16px;">
+	<img src="https://github.com/Juan-Garcia16.png" width="40" alt="Juan-Garcia16" style="border-radius:6px; vertical-align:middle; margin-right:8px;">
+	<strong>Juan-Garcia16</strong>
+</a>
 
 
